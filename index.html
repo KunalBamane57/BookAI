@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Generator API</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body.light-mode {
+            --bg-color: #f0f4f8;
+            --text-color: #1e293b;
+            --navbar-bg: #e2e8f0;
+            --navbar-text: #1e293b;
+            --box-bg: #f0f4f8;
+            --box-border: #d1d5db;
+            --table-bg: #ffffff;
+            --table-border: #d1d5db;
+            --code-bg: #f0f4f8;
+        }
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --navbar-bg: #1e293b;
+            --navbar-text: #e2e8f0;
+            --box-bg: #1e293b;
+            --box-border: #334155;
+            --table-bg: #1e293b;
+            --table-border: #334155;
+            --code-bg: #1e293b;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .navbar {
+            background-color: var(--navbar-bg);
+            color: var(--navbar-text);
+        }
+        .box_1, .box_2, .box_3, .box_4, .box_5, .box_6 {
+            background-color: var(--box-bg);
+            border-color: var(--box-border);
+        }
+        table {
+            background-color: var(--table-bg);
+            border-color: var(--table-border);
+        }
+        code {
+            background-color: var(--code-bg);
+        }
+        .nav-item:hover {
+            color: #06b6d4; /* Tailwind's cyan-400 color */
+          }
+        .api p{
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-[#e2e8f0] dark-mode">
+    <div class="section1">
+        <div class="container_1 mx-auto">
+            <div class="navbar h-auto">
+                <div class="navtop text-3xl md:text-5xl h-24 md:h-36 font-bold flex justify-center items-center" style="background:#6366f1">
+                    Book Generator API
+                </div>
+                <div class="navbottom h-auto font-normal tracking-wide list-none py-4">
+                    <ul class="flex flex-col md:flex-row justify-center items-center">
+                            <li class="py-2 md:py-0 mx-2 md:mx-4">
+                                <a 
+                                    href="#Overview" 
+                                    style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" 
+                                    onmouseover="this.style.color=document.body.classList.contains('light-mode') ? 'black' : 'cyan'" 
+                                    onmouseout="this.style.color=document.body.classList.contains('light-mode') ? 'black' : '#e2e8f0'">
+                                    OVERVIEW
+                                </a>
+                            </li>
+                            <li class="py-2 md:py-0 mx-2 md:mx-4">
+                                <a 
+                                    href="#Authentication" 
+                                    style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" 
+                                    onmouseover="this.style.color=document.body.classList.contains('light-mode') ? 'black' : 'cyan'" 
+                                    onmouseout="this.style.color=document.body.classList.contains('light-mode') ? 'black' : '#e2e8f0'">
+                                    AUTHENTICATION
+                                </a>
+                            </li>
+                            <li class="py-2 md:py-0 mx-2 md:mx-4">
+                                <a 
+                                    href="#Endpoints" 
+                                    style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" 
+                                    onmouseover="this.style.color=document.body.classList.contains('light-mode') ? 'black' : 'cyan'" 
+                                    onmouseout="this.style.color=document.body.classList.contains('light-mode') ? 'black' : '#e2e8f0'">
+                                    ENDPOINTS
+                                </a>
+                            </li>
+                            <li class="py-2 md:py-0 mx-2 md:mx-4">
+                                <a 
+                                    href="#Tutorial" 
+                                    style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" 
+                                    onmouseover="this.style.color=document.body.classList.contains('light-mode') ? 'black' : 'cyan'" 
+                                    onmouseout="this.style.color=document.body.classList.contains('light-mode') ? 'black' : '#e2e8f0'">
+                                    TUTORIAL
+                                </a>
+                            </li>
+                            <li class="py-2 md:py-0 mx-2 md:mx-4">
+                                <a 
+                                    href="#Code Examples" 
+                                    style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" 
+                                    onmouseover="this.style.color=document.body.classList.contains('light-mode') ? 'black' : 'cyan'" 
+                                    onmouseout="this.style.color=document.body.classList.contains('light-mode') ? 'black' : '#e2e8f0'">
+                                    CODE EXAMPLES
+                                </a>
+                            </li>
+                            <li class="py-2 md:py-0 mx-2 md:mx-4">
+                                <a 
+                                    href="#API Pricing" 
+                                    style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" 
+                                    onmouseover="this.style.color=document.body.classList.contains('light-mode') ? 'black' : 'cyan'" 
+                                    onmouseout="this.style.color=document.body.classList.contains('light-mode') ? 'black' : '#e2e8f0'">
+                                    PRICING
+                                </a>
+                            </li>
+                                  
+                        <label class="togglebtn inline-flex items-center cursor-pointer">
+                            <span class="ms-3 text-sm font-medium">Light-Mode</span>
+                            &#160;&#160;
+                            <input type="checkbox" id="mode-toggle" class="sr-only peer">
+                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer-checked:bg-blue-600">
+                                <div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-transform peer-checked:translate-x-full"></div>
+                            </div>
+                        </label>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_2 mx-4 md:mx-30 lg:mx-64 px-4">
+        <div class="box_1 my-6 md:my-10 rounded-xl border shadow-lg shadow-black/10 px-6 md:px-10 py-6 md:py-7">
+            <h3 id="Overview" class="text-xl md:text-2xl text-indigo-300 font-bold mt-10">Overview</h3>
+            <p class="text-base md:text-lg mt-2">The Book Generator API allows you to generate books on various topics using different language models. This documentation provides details on how to use the API, including authentication, available endpoints, and code examples.</p>
+        </div>
+
+        <div class="box_2 my-6 md:my-10 rounded-xl border shadow-lg shadow-black/10 px-6 md:px-10 py-6 md:py-8">
+            <h3 id="Authentication" class="text-xl md:text-2xl text-indigo-300 font-bold">Authentication</h3>
+            <p class="text-base md:text-lg mt-2">To use the API, you need to include your API key in the header of each request:</p>
+            <div class="api border border-gray-500 mt-4">
+                <div class="innerapi border border-gray-500 w-full md:w-56 text-center py-3 md:py-4 ml-4">
+                    X-API-Key: &#160;YOUR_API_KEY
+                </div>
+            </div>
+            <p class="text-base md:text-lg mt-2">To generate an API key, use the button below:</p>
+            <div id="apibtn" class="h-12 w-44 p-3 font-semibold my-3 rounded text-gray-900 cursor-pointer transition ease-in-out duration-300 transform hover:scale-105 text-center" style="background-color:#22d3ee;">
+                Generate API Key
+            </div>
+            <div class="api border border-gray-500 mt-4">
+                <div id="apitext" class="apitext py-3 px-4 md:pl-5 overflow-hidden whitespace-nowrap text-ellipsis">
+                    <!-- The generated API key will be displayed here -->
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modeToggle = document.getElementById('mode-toggle');
+                const currentMode = localStorage.getItem('theme') || 'dark-mode';
+                document.body.classList.add(currentMode);
+        
+                modeToggle.checked = currentMode === 'light-mode';
+        
+                modeToggle.addEventListener('change', function() {
+                    const newMode = modeToggle.checked ? 'light-mode' : 'dark-mode';
+                    document.body.classList.remove('light-mode', 'dark-mode');
+                    document.body.classList.add(newMode);
+                    localStorage.setItem('theme', newMode);
+                });
+            });
+        
+            document.getElementById('apibtn').addEventListener('click', function () {
+                const apiKey = 'YOUR API KEY : <span class="font-semibold text-lg">' + generateApiKey() + '</span>';
+                document.getElementById('apitext').innerHTML = apiKey;
+            });
+        
+            function generateApiKey() {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let apiKey = '';
+                for (let i = 0; i < 45; i++) {
+                    apiKey += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return apiKey;
+            }
+        </script>
+        
+
+        <div
+    class="box_3 bg-gray-800 my-6 md:my-10 rounded-xl border border-gray-600 shadow-lg shadow-black/10 px-6 md:px-10 pt-6 md:pt-16 pb-8">
+    <h3 id="Endpoints" class="Endpoints text-xl md:text-2xl text-indigo-300 font-bold">Endpoints</h3>
+    <h4 class="text-lg md:text-xl text-indigo-300 font-bold pt-6 md:pt-8">Generate Book</h4>
+    <div class="apitablebtn flex flex-row md:flex-row items-center mt-4">
+        <div
+            class="btn text-base md:text-lg h-7 w-20 md:h-8 md:w-24 px-2 font-semibold rounded my-1 bg-cyan-400 text-center text-gray-900" style="background-color:#22d3ee;">
+            Post
+        </div>
+        <div
+            class="btn text-base md:text-lg h-12 w-48 md:h-14 md:w-56 p-3 px-3 font-semibold my-1 md:ml-3 rounded bg-indigo-600 text-center text-gray-100 mt-2 md:mt-0" style="background:#6366f1">
+            /api/generate-book
+        </div>
+    </div>
+    <h4 class="text-lg md:text-xl text-indigo-300 font-bold pt-6 md:pt-8 pb-4 md:pb-5">Request Body</h4>
+
+    <div class="relative overflow-x-auto border border-gray-600 rounded-lg text-base md:text-lg darkmode">
+        <table class="w-full text-sm md:text-base text-left rtl:text-right text-gray-200" style="font-size:17px">
+            <thead class="tbl1" style="background:#6366f1">
+                <tr>
+                    <th scope="col" class="px-4 py-3 md:px-6 md:py-4">Product name</th>
+                    <th scope="col" class="px-4 py-3 md:px-6 md:py-4">Type</th>
+                    <th scope="col" class="px-4 py-3 md:px-6 md:py-4">Description</th>
+                </tr>
+            </thead>
+            <tbody class="bg-gray-800">
+                <tr class="border-b border-gray-700">
+                    <th scope="row" class="px-4 py-4 font-medium text-cyan-400 whitespace-nowrap" style="color:#22d3ee;">api</th>
+                    <td class="px-4 py-4">string</td>
+                    <td class="px-4 py-4">The API provider to use. Options: "openai" or "together"</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                    <th scope="row" class="px-4 py-4 font-medium text-cyan-400 whitespace-nowrap" style="color:#22d3ee;">model</th>
+                    <td class="px-4 py-4">string</td>
+                    <td class="px-4 py-4">The specific model to use (e.g., "gpt-3.5-turbo", "gpt-4", "llama-2-70b")</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                    <th scope="row" class="px-4 py-4 font-medium text-cyan-400 whitespace-nowrap" style="color:#22d3ee;">topic</th>
+                    <td class="px-4 py-4">string</td>
+                    <td class="px-4 py-4">The main topic or theme of the book</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                    <th scope="row" class="px-4 py-4 font-medium text-cyan-400 whitespace-nowrap" style="color:#22d3ee;">language</th>
+                    <td class="px-4 py-4">string</td>
+                    <td class="px-4 py-4">The language in which the book should be generated</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                    <th scope="row" class="px-4 py-4 font-medium text-cyan-400 whitespace-nowrap" style="color:#22d3ee;">word_count</th>
+                    <td class="px-4 py-4">integer</td>
+                    <td class="px-4 py-4">The approximate number of words for the generated book</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <h4 class="text-lg md:text-xl text-indigo-300 font-bold pt-6 md:pt-8">Response</h4>
+    <div class="api border border-gray-600 px-4 decoration-slate-300 py-2 mt-2 bg-gray-800 dark:bg-gray-100 rounded-md">
+        <p class="tracking-wide font-light py-2 p-4 break-words">
+            <code class=" block whitespace-pre-wrap text-sm md:text-base font-light text-gray-100 dark:text-black" style="background:#1e293b">
+{<br>
+"message": "Book generation started",<br>
+"status": "processing",<br>
+"job_id": "unique-job-identifier"<br>
+}
+            </code>
+        </p>
+    </div>
+</div>
+
+
+
+
+        <div
+            class="box_4 bg-[#1e293b] my-10 rounded-xl border border-[#334155] shadow-lg shadow-[rgba(0,0,0,0.1)] p-6 md:p-10">
+            <h3 id="Tutorial" class="text-2xl text-[#a5b4fc] font-bold text-indigo-300">Tutorial</h3>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Step 1: Obtain an API Key</h4>
+            <p class="text-[15px] md:text-[17px] text-slate-200" style="font-size:17px">Generate an API key using the button in the
+                Authentication section above.</p>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Step 2: Make a Request</h4>
+            <p class="text-[15px] md:text-[17px] text-slate-200" style="font-size:17px">Use your preferred programming language or tool to make
+                a POST request to the /api/generate-book endpoint. Include your API key in the header and the required
+                parameters in the request body.</p>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Step 3: Handle the Response</h4>
+            <p class="text-[15px] md:text-[17px] text-slate-200" style="font-size:17px">The API will return a response with a job ID. You can
+                use this ID to check the status of your book generation job.</p>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Step 4: Retrieve the Generated Book</h4>
+            <p class="text-[15px] md:text-[17px] text-slate-200" style="font-size:17px">Once the job is complete, you can retrieve the
+                generated book using the job ID (endpoint to be implemented)</p>
+        </div>
+
+
+        <div
+            class="box_5 bg-[#1e293b] my-10 rounded-xl border border-[#334155] shadow-lg shadow-[rgba(0,0,0,0.1)] p-6 md:p-10">
+            <h3 id="Code Examples" class="text-2xl text-[#a5b4fc] font-bold text-indigo-300">Code Examples</h3>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Python</h4>
+            <div class="api border border-gray-600 px-4 mt-1">
+                <p
+                    class="text-[#e2e8f0] tracking-wide font-light decoration-[#334155] py-2 bg-[#1e293b] p-4 rounded-md break-words">
+                    <code class="block whitespace-pre-wrap text-[15px] md:text-[16px] font-light">
+import requests
+            
+API_KEY = "your_api_key_here"
+            
+API_ENDPOINT = "https://tryBookAI.com/api/generate-book"
+            
+headers = {
+"Content-Type": "application/json",
+"X-API-Key": API_KEY
+}
+            
+data = {
+"api": "openai",
+"model": "gpt-3.5-turbo",
+"topic": "The Future of Artificial Intelligence",
+"language": "English",
+"word_count": 5000
+}
+            
+response = requests.post(API_ENDPOINT, json=data, headers=headers)
+            
+if response.status_code == 200:
+result = response.json()
+print(f"Book generation started. Job ID: {result['job_id']}")
+else:
+print(f"Error: {response.status_code} - {response.text}")
+                        </code>
+                </p>
+            </div>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">JavaScript (Node.js)</h4>
+            <div class="api border border-gray-600 px-4 mt-1">
+                <p
+                    class="text-[#e2e8f0] tracking-wide font-light decoration-[#334155] py-2 bg-[#1e293b] p-4 rounded-md break-words">
+                    <code class="block whitespace-pre-wrap text-[15px] md:text-[16px] font-light">
+const axios = require('axios');
+            
+const API_KEY = 'your_api_key_here';
+const API_ENDPOINT = 'https://tryBookAI.com/api/generate-book';
+            
+const headers = {
+'Content-Type': 'application/json',
+'X-API-Key': API_KEY
+};
+            
+const data = {
+api: 'openai',
+model: 'gpt-3.5-turbo',
+topic: 'The Future of Artificial Intelligence',
+language: 'English',
+word_count: 5000
+};
+            
+axios.post(API_ENDPOINT, data, { headers })
+.then(response => {
+console.log(`Book generation started. Job ID: ${response.data.job_id}`);
+})
+.catch(error => {
+console.error('Error:', error.response ? error.response.data : error.message);
+});
+                        </code>
+                </p>
+            </div>
+        </div>
+
+
+
+        <div
+            class="box_6 bg-[#1e293b] my-10 rounded-xl border border-[#334155] shadow-lg shadow-[rgba(0,0,0,0.1)] p-6 md:p-10">
+            <h3 id="API Pricing" class="text-2xl font-bold text-indigo-300">API Pricing</h3>
+            <p class="text-[16px] md:text-[17px] text-slate-200 mt-2" style="font-size:17px">Our API pricing is based on the model used and the
+                number of tokens processed. Here's a breakdown of the costs:</p>
+
+                <div class="relative overflow-x-auto border border-gray-600 rounded-lg text-base mt-5">
+                    <table class="w-full text-sm text-left text-gray-200 dark:text-gray-500" style="font-size:17px">
+                        <thead class="" style="background:#6366f1">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 md:px-6">API</th>
+                                <th scope="col" class="px-4 py-3 md:px-6">Model</th>
+                                <th scope="col" class="px-4 py-3 md:px-6">Price per 1K tokens</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800 dark:bg-white text-gray-200 dark:text-gray-800">
+                            <tr class="border-b border-gray-700 dark:border-gray-300 text-[16px] md:text-[17px]">
+                                <th scope="row" class="px-4 py-4 md:px-6 font-medium text-[#e2e8f0] dark:text-cyan-600 whitespace-nowrap">
+                                    OpenAI
+                                </th>
+                                <td class="px-4 py-4 md:px-6">GPT-3.5</td>
+                                <td class="px-4 py-4 md:px-6">$0.002</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 dark:border-gray-300 text-[16px] md:text-[17px]">
+                                <th scope="row" class="px-4 py-4 md:px-6 font-medium text-[#e2e8f0] dark:text-cyan-600 whitespace-nowrap">
+                                    OpenAI
+                                </th>
+                                <td class="px-4 py-4 md:px-6">GPT-4</td>
+                                <td class="px-4 py-4 md:px-6">$0.03</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 dark:border-gray-300 text-[16px] md:text-[17px]">
+                                <th scope="row" class="px-4 py-4 md:px-6 font-medium text-[#e2e8f0] dark:text-cyan-600 whitespace-nowrap">
+                                    Together AI
+                                </th>
+                                <td class="px-4 py-4 md:px-6">Llama-2-70b</td>
+                                <td class="px-4 py-4 md:px-6">$0.0008</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 dark:border-gray-300 text-[16px] md:text-[17px]">
+                                <th scope="row" class="px-4 py-4 md:px-6 font-medium text-[#e2e8f0] dark:text-cyan-600 whitespace-nowrap">
+                                    Together AI
+                                </th>
+                                <td class="px-4 py-4 md:px-6">Llama-2-13b</td>
+                                <td class="px-4 py-4 md:px-6">$0.0006</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Token Estimation</h4>
+            <p class="text-[16px] md:text-[17px] text-slate-200 mt-2 md:pr-10" style="font-size:17px">On average, 1 token is approximately 4
+                characters or 0.75 words. For precise pricing, we recommend using our token calculator tool.</p>
+
+            <h4 class="text-xl text-[#a5b4fc] font-bold pt-8 text-indigo-300">Billing</h4>
+            <p class="text-[16px] md:text-[17px] text-slate-200 mt-2 md:pr-10" style="font-size:17px">You will only be charged for the tokens
+                used in generating the book. The API tracks token usage and bills accordingly. Detailed usage reports
+                are available in your account dashboard.</p>
+        </div>
+    </div>
+
+    </div>
+</body>
+</html>
